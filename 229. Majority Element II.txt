@@ -1,0 +1,41 @@
+class Solution {
+    public List<Integer> majorityElement(int[] nums) {
+        HashMap<Integer,Integer> mpp=new HashMap<>();
+        List<Integer> arr= new ArrayList<>();
+        int n=nums.length,x=0,y=0,c1,c2;
+        c1=0;
+        c2=0;
+        for(int i=0;i<n;i++){ 
+           // if(nums[i]==c1 || nums[i]==c2)
+            if(c1==0 && nums[i]!=y){
+                x=nums[i];
+                c1++;
+            }
+            else if(c2==0 && nums[i]!=x){
+                y=nums[i];
+                c2++;
+            }
+            else if(nums[i]==x)
+            c1++;
+            else if(nums[i]==y)
+            c2++;
+            else{
+                c1--;
+                c2--;
+            }  
+        }
+        c1=0;
+        c2=0;
+        for(int i=0;i<n;i++){
+            if(nums[i]==x)
+            c1++;
+            else if(nums[i]==y)
+            c2++;
+        }
+        if(c1>n/3)
+        arr.add(x);
+         if(c2>n/3)
+        arr.add(y);
+        return arr;
+    }
+}
